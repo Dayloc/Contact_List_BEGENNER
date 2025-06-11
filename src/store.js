@@ -1,32 +1,52 @@
-export const initialStore=()=>{
-  return{
+export const initialStore = () => {
+  return {
     message: null,
-    todos: [
-      {
-        id: 1,
-        title: "Make the bed",
-        background: null,
-      },
-      {
-        id: 2,
-        title: "Do my homework",
-        background: null,
-      }
-    ]
-  }
-}
+    agendas: [],
+    contactos: [],
+  };
+};
 
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
-    case 'add_task':
-
-      const { id,  color } = action.payload
-
+  switch (action.type) {
+    case "guardar_agendas":
       return {
         ...store,
-        todos: store.todos.map((todo) => (todo.id === id ? { ...todo, background: color } : todo))
+        agendas: action.payload,
+      };
+    case "guardar_contactos":
+      return {
+        ...store,
+        contactos: action.payload,
+      };
+    case "agregar_contacto":
+      return {
+        ...store,
+        contactos: [...store.contactos, action.payload],
+      };
+    case "actualizar_contacto":
+      return {
+        ...store,
+        contactos: store.contactos.map((contacto) =>
+          contacto.id === action.payload.id ? action.payload : contacto
+        ),
+      };
+    case "eliminar_contacto":
+      return {
+        ...store,
+        contactos: store.contactos.filter(
+          (contacto) => contacto.id !== action.payload
+        ),
+      };
+
+    
+    case "eliminar_agenda":
+      return {
+        ...store,
+        agendas: store.agendas.filter(
+          (agenda) => agenda.slug !== action.payload
+        ),
       };
     default:
-      throw Error('Unknown action.');
-  }    
+      throw Error("Unknown action.");
+  }
 }
