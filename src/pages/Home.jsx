@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import {
-  crearAgenda,
-  obtenerAgendas,
-  deleteAgenda,
-} from "../services/fetchs.jsx";
+import {  crearAgenda,  obtenerAgendas,  deleteAgenda,} from "../services/fetchs.jsx";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
@@ -23,7 +19,7 @@ const handleCreateAgenda = async () => {
 
   const alreadyExists = agendas.some((a) => a.slug === slug);
   if (alreadyExists) {
-    alert("Esa agenda ya existe. Intenta con otro nombre.");
+    navigate(`/contacts/${slug}`)
     setSlug("");
     return;
   }
