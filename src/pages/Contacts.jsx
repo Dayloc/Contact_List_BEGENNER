@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import { obtenerContactos, eliminarContacto } from "../services/fetchs.jsx";
+import { obtenerContactos, eliminarContacto } from "../services/fetchs.js";
 import mujer from "../assets/img/mujer.jpg"; // Asegúrate de que la ruta sea correcta
 
 function Contacts() {

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import {  crearAgenda,  obtenerAgendas,  deleteAgenda,} from "../services/fetchs.jsx";
+import {  crearAgenda,  obtenerAgendas,  deleteAgenda,} from "../services/fetchs.js";
 import { useNavigate } from "react-router-dom";
 
 export const Home = () => {
@@ -8,7 +8,7 @@ export const Home = () => {
   const { agendas } = store;
   const [slug, setSlug] = useState("");
   const navigate = useNavigate();
-
+  const myUser="Dayloc"
   useEffect(() => {
     obtenerAgendas(dispatch);
   }, [dispatch]);
@@ -16,31 +16,38 @@ export const Home = () => {
 
 const handleCreateAgenda = async () => {
   if (!slug.trim()) return;
-
-  const alreadyExists = agendas.some((a) => a.slug === slug);
-  if (alreadyExists) {
-    navigate(`/contacts/${slug}`)
-    setSlug("");
+  if (slug!== myUser){
+    alert("Ese no es su nombre de usuario")
+    setSlug("")
     return;
-  }
-  await crearAgenda(slug, dispatch);
+  }else{
+    const alreadyExists = agendas.some((a) => a.slug === myUser);
+     if (alreadyExists) {
+    alert("Lo dirijo hacia su agenda!!")
+    navigate(`/contacts/${slug}`)
+    setSlug(""); 
+    }else{
+      await crearAgenda(myUser, dispatch);
 
-  alert("Agenda creada con éxito");
-  setSlug("");
-  navigate(`/contacts/${slug}`);
-};
+      alert("Agenda creada con éxito");
+      setSlug("");
+      navigate(`/contacts/${slug}`);
+    }}}
+ 
+ 
+
 
 console.log("Agendas:", agendas); // Depuración
   return (
     <div className="container d-flex flex-column align-items-center justify-content-center min-vh-100 bg-light py-4">
-      <h1 className="mb-4 fw-bold">Crear una Agenda</h1>
+      <h1 className="mb-4 fw-bold">Cree su Agenda</h1>
 
       <div className="card shadow p-4 w-100" style={{ maxWidth: "400px" }}>
         <div className="mb-3">
           <input
             type="text"
             className="form-control"
-            placeholder="Ingrese el nombre de la agenda"
+            placeholder="Ingrese su nombre Agenda"
             value={slug}
             onChange={(e) => setSlug(e.target.value)}
             onKeyDown={(e) => {

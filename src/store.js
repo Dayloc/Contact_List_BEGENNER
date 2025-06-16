@@ -1,3 +1,4 @@
+//ESto es dla parte de almacenaje
 export const initialStore = () => {
   return {
     message: null,
@@ -5,7 +6,7 @@ export const initialStore = () => {
     contactos: [],
   };
 };
-
+//parte donde gestiono el almacenaje
 export default function storeReducer(store, action = {}) {
   switch (action.type) {
     case "guardar_agendas":
