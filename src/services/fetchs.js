@@ -1,6 +1,7 @@
 
-
 const API_URL = "https://playground.4geeks.com/contact";
+
+
 
 //----------------------1
 
@@ -23,6 +24,7 @@ export async function obtenerAgendas(dispatch) {
 //----------------------2
 
 export async function crearAgenda(slug, dispatch) {
+ const alreadyExists = agendas.some((a) => a.slug === slug);
   try {
     const response = await fetch(`${API_URL}/agendas/${slug}`, {
       method: "POST",
@@ -53,6 +55,7 @@ export async function crearAgenda(slug, dispatch) {
     
   }
 }
+
 //--------------------------3
 
 export async function obtenerContactos(dispatch, slug) {
