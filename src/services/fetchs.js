@@ -1,7 +1,4 @@
-
 const API_URL = "https://playground.4geeks.com/contact";
-
-
 
 //----------------------1
 
@@ -24,7 +21,6 @@ export async function obtenerAgendas(dispatch) {
 //----------------------2
 
 export async function crearAgenda(slug, dispatch) {
- const alreadyExists = agendas.some((a) => a.slug === slug);
   try {
     const response = await fetch(`${API_URL}/agendas/${slug}`, {
       method: "POST",
@@ -36,7 +32,6 @@ export async function crearAgenda(slug, dispatch) {
     console.log("Respuesta de la API:", response); // Depuración
 
     if (!response.ok) {
-      
       throw new Error(errorData.message || "Error al crear la agenda");
     }
 
@@ -52,7 +47,6 @@ export async function crearAgenda(slug, dispatch) {
     return data; // Devuelve la agenda creada
   } catch (error) {
     console.error("Error al crear la agenda, o ya existe :", error); // Depuración
-    
   }
 }
 
@@ -160,7 +154,6 @@ export async function deleteAgenda(slug, dispatch) {
       type: "eliminar_agenda",
       payload: slug,
     });
-
   } catch (error) {
     console.error("Error al eliminar la agenda:", error);
   }
